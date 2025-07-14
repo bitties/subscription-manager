@@ -27,9 +27,9 @@ function formatBeijingTime(date = new Date(), format = 'full') {
   }
 }
 
-// 農歷轉換工具函數
+// 農曆轉換工具函數
 const lunarCalendar = {
-  // 農歷數據 (1900-2100年)
+  // 農曆數據 (1900-2100年)
   lunarInfo: [
     0x04bd8, 0x04ae0, 0x0a570, 0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2,
     0x04ae0, 0x0a5b6, 0x0a4d0, 0x0d250, 0x1d255, 0x0b540, 0x0d6a0, 0x0ada2, 0x095b0, 0x14977,
@@ -48,19 +48,19 @@ const lunarCalendar = {
     0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0
   ],
 
-  // 天幹地支
+  // 天干地支
   gan: ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'],
-  zhi: ['子', '醜', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'],
+  zhi: ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'],
 
-  // 農歷月份
+  // 農曆月份
   months: ['正', '二', '三', '四', '五', '六', '七', '八', '九', '十', '冬', '臘'],
 
-  // 農歷日期
+  // 農曆日期
   days: ['初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十',
          '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
          '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'],
 
-  // 獲取農歷年天數
+  // 獲取農曆年天數
   lunarYearDays: function(year) {
     let sum = 348;
     for (let i = 0x8000; i > 0x8; i >>= 1) {
@@ -82,12 +82,12 @@ const lunarCalendar = {
     return this.lunarInfo[year - 1900] & 0xf;
   },
 
-  // 獲取農歷月天數
+  // 獲取農曆月天數
   monthDays: function(year, month) {
     return (this.lunarInfo[year - 1900] & (0x10000 >> month)) ? 30 : 29;
   },
 
-  // 公歷轉農歷
+  // 公歷轉農曆
   solar2lunar: function(year, month, day) {
     if (year < 1900 || year > 2100) return null;
 
@@ -141,7 +141,7 @@ const lunarCalendar = {
 
     const lunarDay = offset + 1;
 
-    // 生成農歷字符串
+    // 生成農曆字符串
     const ganIndex = (lunarYear - 4) % 10;
     const zhiIndex = (lunarYear - 4) % 12;
     const yearStr = this.gan[ganIndex] + this.zhi[zhiIndex] + '年';
@@ -407,7 +407,7 @@ const adminPage = `
       border-top: 6px solid #1f2937;
     }
 
-    /* 農歷顯示樣式 */
+    /* 農曆顯示樣式 */
     .lunar-display {
       font-size: 0.75rem;
       color: #6366f1;
@@ -526,7 +526,7 @@ const adminPage = `
       <div class="flex items-center space-x-4">
         <label class="lunar-toggle">
           <input type="checkbox" id="listShowLunar" class="form-checkbox h-4 w-4 text-indigo-600">
-          <span class="text-gray-700">顯示農歷</span>
+          <span class="text-gray-700">顯示農曆</span>
         </label>
         <button id="addSubscriptionBtn" class="btn-primary text-white px-4 py-2 rounded-md text-sm font-medium flex items-center">
           <i class="fas fa-plus mr-2"></i>添加新訂閱
@@ -600,7 +600,7 @@ const adminPage = `
         <div class="mb-4">
           <label class="lunar-toggle">
             <input type="checkbox" id="showLunar" class="form-checkbox h-4 w-4 text-indigo-600">
-            <span class="text-gray-700">顯示農歷日期</span>
+            <span class="text-gray-700">顯示農曆日期</span>
           </label>
         </div>
 
@@ -724,9 +724,9 @@ const adminPage = `
       }
     }
 
-    // 農歷轉換工具函數 - 前端版本
+    // 農曆轉換工具函數 - 前端版本
     const lunarCalendar = {
-      // 農歷數據 (1900-2100年)
+      // 農曆數據 (1900-2100年)
       lunarInfo: [
         0x04bd8, 0x04ae0, 0x0a570, 0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2,
         0x04ae0, 0x0a5b6, 0x0a4d0, 0x0d250, 0x1d255, 0x0b540, 0x0d6a0, 0x0ada2, 0x095b0, 0x14977,
@@ -745,19 +745,19 @@ const adminPage = `
         0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0
       ],
 
-      // 天幹地支
+      // 天干地支
       gan: ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'],
-      zhi: ['子', '醜', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'],
+      zhi: ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'],
 
-      // 農歷月份
+      // 農曆月份
       months: ['正', '二', '三', '四', '五', '六', '七', '八', '九', '十', '冬', '臘'],
 
-      // 農歷日期
+      // 農曆日期
       days: ['初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十',
              '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
              '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'],
 
-      // 獲取農歷年天數
+      // 獲取農曆年天數
       lunarYearDays: function(year) {
         let sum = 348;
         for (let i = 0x8000; i > 0x8; i >>= 1) {
@@ -779,12 +779,12 @@ const adminPage = `
         return this.lunarInfo[year - 1900] & 0xf;
       },
 
-      // 獲取農歷月天數
+      // 獲取農曆月天數
       monthDays: function(year, month) {
         return (this.lunarInfo[year - 1900] & (0x10000 >> month)) ? 30 : 29;
       },
 
-      // 公歷轉農歷
+      // 公歷轉農曆
       solar2lunar: function(year, month, day) {
         if (year < 1900 || year > 2100) return null;
 
@@ -838,7 +838,7 @@ const adminPage = `
 
         const lunarDay = offset + 1;
 
-        // 生成農歷字符串
+        // 生成農曆字符串
         const ganIndex = (lunarYear - 4) % 10;
         const zhiIndex = (lunarYear - 4) % 12;
         const yearStr = this.gan[ganIndex] + this.zhi[zhiIndex] + '年';
@@ -858,7 +858,7 @@ const adminPage = `
       }
     };
 
-    // 農歷顯示相關函數
+    // 農曆顯示相關函數
     function updateLunarDisplay(dateInputId, lunarDisplayId) {
       const dateInput = document.getElementById(dateInputId);
       const lunarDisplay = document.getElementById(lunarDisplayId);
@@ -873,7 +873,7 @@ const adminPage = `
       const lunar = lunarCalendar.solar2lunar(date.getFullYear(), date.getMonth() + 1, date.getDate());
 
       if (lunar) {
-        lunarDisplay.textContent = '農歷：' + lunar.fullStr;
+        lunarDisplay.textContent = '農曆：' + lunar.fullStr;
         lunarDisplay.classList.add('show');
       } else {
         lunarDisplay.classList.remove('show');
@@ -904,7 +904,7 @@ const adminPage = `
       const listShowLunar = document.getElementById('listShowLunar');
       // 保存用戶偏好
       localStorage.setItem('showLunar', listShowLunar.checked);
-      // 重新加載訂閱列表以應用農歷顯示設置
+      // 重新加載訂閱列表以應用農曆顯示設置
       loadSubscriptions();
     }
 
@@ -1000,7 +1000,7 @@ const adminPage = `
     // 獲取所有訂閱並按到期時間排序
     async function loadSubscriptions() {
       try {
-        // 加載農歷顯示偏好
+        // 加載農曆顯示偏好
         const listShowLunar = document.getElementById('listShowLunar');
         const saved = localStorage.getItem('showLunar');
         if (saved !== null) {
@@ -1054,13 +1054,13 @@ const adminPage = `
             '<i class="fas fa-sync-alt text-blue-500 ml-1" title="自動續訂"></i>' : 
             '<i class="fas fa-ban text-gray-400 ml-1" title="不自動續訂"></i>';
           
-          // 檢查是否顯示農歷
+          // 檢查是否顯示農曆
           const showLunar = document.getElementById('listShowLunar').checked;
           let lunarExpiryText = '';
           let startLunarText = '';
 
           if (showLunar) {
-            // 計算農歷日期
+            // 計算農曆日期
             const expiryDateObj = new Date(subscription.expiryDate);
             const lunarExpiry = lunarCalendar.solar2lunar(expiryDateObj.getFullYear(), expiryDateObj.getMonth() + 1, expiryDateObj.getDate());
             lunarExpiryText = lunarExpiry ? lunarExpiry.fullStr : '';
@@ -1096,7 +1096,7 @@ const adminPage = `
 
           // 到期時間相關信息
           const expiryDateText = formatBeijingTime(new Date(subscription.expiryDate), 'date');
-          const lunarHtml = lunarExpiryText ? createHoverText('農歷: ' + lunarExpiryText, 25, 'text-xs text-blue-600 mt-1') : '';
+          const lunarHtml = lunarExpiryText ? createHoverText('農曆: ' + lunarExpiryText, 25, 'text-xs text-blue-600 mt-1') : '';
           const daysLeftText = daysDiff < 0 ? '已過期' + Math.abs(daysDiff) + '天' : '還剩' + daysDiff + '天';
           const startDateText = subscription.startDate ?
             '開始: ' + formatBeijingTime(new Date(subscription.startDate), 'date') + (startLunarText ? ' (' + startLunarText + ')' : '') : '';
@@ -1238,7 +1238,7 @@ const adminPage = `
 
         addHoverListeners();
 
-        // 添加農歷開關事件監聽
+        // 添加農曆開關事件監聽
         listShowLunar.removeEventListener('change', handleListLunarToggle);
         listShowLunar.addEventListener('change', handleListLunarToggle);
       } catch (error) {
@@ -1336,7 +1336,7 @@ const adminPage = `
         element.addEventListener('change', calculateExpiryDate);
       });
 
-      // 添加農歷顯示事件監聽
+      // 添加農曆顯示事件監聽
       document.getElementById('showLunar').removeEventListener('change', toggleLunarDisplay);
       document.getElementById('showLunar').addEventListener('change', toggleLunarDisplay);
 
@@ -1373,7 +1373,7 @@ const adminPage = `
 
       document.getElementById('expiryDate').value = expiry.toISOString().split('T')[0];
 
-      // 更新農歷顯示
+      // 更新農曆顯示
       updateLunarDisplay('startDate', 'startDateLunar');
       updateLunarDisplay('expiryDate', 'expiryDateLunar');
     }
@@ -1469,7 +1469,7 @@ const adminPage = `
           document.getElementById('subscriptionModal').classList.remove('hidden');
           setupModalEventListeners();
 
-          // 更新農歷顯示
+          // 更新農曆顯示
           setTimeout(() => {
             updateLunarDisplay('startDate', 'startDateLunar');
             updateLunarDisplay('expiryDate', 'expiryDateLunar');
@@ -1484,7 +1484,7 @@ const adminPage = `
     async function deleteSubscription(e) {
       const id = e.target.dataset.id || e.target.parentElement.dataset.id;
       
-      if (!confirm('確定要刪除這個訂閱嗎？此操作不可恢覆。')) {
+      if (!confirm('確定要刪除這個訂閱嗎？此操作不可恢復。')) {
         return;
       }
       
@@ -1594,7 +1594,7 @@ const configPage = `
       
       <form id="configForm" class="space-y-8">
         <div class="border-b border-gray-200 pb-6">
-          <h3 class="text-lg font-medium text-gray-900 mb-4">管理員賬戶</h3>
+          <h3 class="text-lg font-medium text-gray-900 mb-4">管理員帳戶</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="adminUsername" class="block text-sm font-medium text-gray-700">用戶名</label>
@@ -1613,9 +1613,9 @@ const configPage = `
           <div class="mb-6">
             <label class="inline-flex items-center">
               <input type="checkbox" id="showLunarGlobal" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" checked>
-              <span class="ml-2 text-sm text-gray-700">在通知中顯示農歷日期</span>
+              <span class="ml-2 text-sm text-gray-700">在通知中顯示農曆日期</span>
             </label>
-            <p class="mt-1 text-sm text-gray-500">控制是否在通知消息中包含農歷日期信息</p>
+            <p class="mt-1 text-sm text-gray-500">控制是否在通知消息中包含農曆日期信息</p>
           </div>
         </div>
 
@@ -1773,9 +1773,9 @@ const configPage = `
                 <p class="mt-1 text-sm text-gray-500">從 <a href="https://resend.com/api-keys" target="_blank" class="text-indigo-600 hover:text-indigo-800">Resend控制台</a> 獲取的 API Key</p>
               </div>
               <div>
-                <label for="emailFrom" class="block text-sm font-medium text-gray-700">發件人郵箱</label>
+                <label for="emailFrom" class="block text-sm font-medium text-gray-700">發件人信箱</label>
                 <input type="email" id="emailFrom" placeholder="noreply@yourdomain.com" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <p class="mt-1 text-sm text-gray-500">必須是已在Resend驗證的域名郵箱</p>
+                <p class="mt-1 text-sm text-gray-500">必須是已在Resend驗證的域名信箱</p>
               </div>
               <div>
                 <label for="emailFromName" class="block text-sm font-medium text-gray-700">發件人名稱</label>
@@ -1783,9 +1783,9 @@ const configPage = `
                 <p class="mt-1 text-sm text-gray-500">顯示在郵件中的發件人名稱</p>
               </div>
               <div>
-                <label for="emailTo" class="block text-sm font-medium text-gray-700">收件人郵箱</label>
+                <label for="emailTo" class="block text-sm font-medium text-gray-700">收件人信箱</label>
                 <input type="email" id="emailTo" placeholder="user@example.com" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <p class="mt-1 text-sm text-gray-500">接收通知郵件的郵箱地址</p>
+                <p class="mt-1 text-sm text-gray-500">接收通知郵件的信箱地址</p>
               </div>
             </div>
             <div class="flex justify-end">
@@ -1851,7 +1851,7 @@ const configPage = `
         document.getElementById('emailFromName').value = config.EMAIL_FROM_NAME || '訂閱提醒系統';
         document.getElementById('emailTo').value = config.EMAIL_TO || '';
 
-        // 加載農歷顯示設置
+        // 加載農曆顯示設置
         document.getElementById('showLunarGlobal').checked = config.SHOW_LUNAR === true;
 
         // 處理多選通知渠道
@@ -2041,7 +2041,7 @@ const configPage = `
         config.EMAIL_TO = document.getElementById('emailTo').value.trim();
 
         if (!config.RESEND_API_KEY || !config.EMAIL_FROM || !config.EMAIL_TO) {
-          showToast('請先填寫 Resend API Key、發件人郵箱和收件人郵箱', 'warning');
+          showToast('請先填寫 Resend API Key、發件人信箱和收件人信箱', 'warning');
           button.innerHTML = originalContent;
           button.disabled = false;
           return;
@@ -2771,15 +2771,15 @@ async function testSingleSubscriptionNotification(id, env) {
 
     const title = `手動測試通知: ${subscription.name}`;
 
-    // 檢查是否顯示農歷（從配置中獲取，默認不顯示）
+    // 檢查是否顯示農曆（從配置中獲取，默認不顯示）
     const showLunar = config.SHOW_LUNAR === true;
     let lunarExpiryText = '';
 
     if (showLunar) {
-      // 計算農歷日期
+      // 計算農曆日期
       const expiryDateObj = new Date(subscription.expiryDate);
       const lunarExpiry = lunarCalendar.solar2lunar(expiryDateObj.getFullYear(), expiryDateObj.getMonth() + 1, expiryDateObj.getDate());
-      lunarExpiryText = lunarExpiry ? ` (農歷: ${lunarExpiry.fullStr})` : '';
+      lunarExpiryText = lunarExpiry ? ` (農曆: ${lunarExpiry.fullStr})` : '';
     }
 
     const commonContent = `**訂閱詳情**:\n- **類型**: ${subscription.customType || '其他'}\n- **到期日**: ${formatBeijingTime(new Date(subscription.expiryDate), 'date')}${lunarExpiryText}\n- **備註**: ${subscription.notes || '無'}`;
@@ -3249,7 +3249,7 @@ async function checkExpiringSubscriptions(env) {
       let commonContent = '';
       expiringSubscriptions.sort((a, b) => a.daysRemaining - b.daysRemaining);
 
-      // 檢查是否顯示農歷（從配置中獲取，默認不顯示）
+      // 檢查是否顯示農曆（從配置中獲取，默認不顯示）
       const showLunar = config.SHOW_LUNAR === true;
 
       for (const sub of expiringSubscriptions) {
@@ -3258,10 +3258,10 @@ async function checkExpiringSubscriptions(env) {
 
         let lunarExpiryText = '';
         if (showLunar) {
-          // 計算農歷日期
+          // 計算農曆日期
           const expiryDateObj = new Date(sub.expiryDate);
           const lunarExpiry = lunarCalendar.solar2lunar(expiryDateObj.getFullYear(), expiryDateObj.getMonth() + 1, expiryDateObj.getDate());
-          lunarExpiryText = lunarExpiry ? ` (農歷: ${lunarExpiry.fullStr})` : '';
+          lunarExpiryText = lunarExpiry ? ` (農曆: ${lunarExpiry.fullStr})` : '';
         }
 
         let statusText;
